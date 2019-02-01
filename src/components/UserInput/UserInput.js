@@ -4,7 +4,7 @@ const userInput = (props) => {
     return (
         <div className='userInput'>
             <input type="text" placeholder="Change username" onChange={props.changedName} value={props.name}/>
-            <input type="text" placeholder="What's on your mind?" onChange={props.changedStatus} />
+            <input type="text" placeholder="What's on your mind?" onChange={props.changedStatus} value={props.status}/>
         </div>
     )
 }

@@ -14,13 +14,35 @@ class App extends Component {
   // Helper Function
   randomNameGenerator = () => {
     let randomNames = ['Joe', 'Nick', 'James', 'Rambo', 'Jenny', 'Kate']
-    let arraySize = randomNames.length
-    let randomNum = Math.floor(Math.random() * 6)
-    // let temp = randomNum;
-    // if (temp === randomNum) {
+    let namesArraySize = randomNames.length
+    
+    let counter = 1
+    let reducingArray = [0, 1, 2, 3, 4, 5]
+    let randomNum = Math.floor(Math.random() * namesArraySize)
+    console.log('randomNum1', randomNum)
+    let temp = [];
 
-    // }
-    // if (randomNum === )
+
+    if (counter === 1) {
+      temp[0] = randomNum
+      counter = 2
+    }
+
+    if (counter === 2) {
+      let result = reducingArray.filter(num => num !== temp[0]);
+      console.log(result)
+      let poop = result[Math.floor(Math.random() * 4)]
+
+      console.log('random', result[Math.floor(Math.random() * 4)])
+      console.log(poop)
+      console.log('aaaa', result[poop])
+      console.log(randomNames[result[poop]])
+
+
+    }
+
+    console.log('randomNum2', randomNum)
+
     return randomNames[randomNum]
   }
 

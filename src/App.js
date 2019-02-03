@@ -19,7 +19,7 @@ class App extends Component {
 
     return randomNames[randomNum]
   }
-
+ 
   buttonNameGenerator = (event) => {
     let currentProfile = this.state.profile[0];
 
@@ -60,9 +60,11 @@ class App extends Component {
         </button>
 
         <UserOutput 
+          staticUserID={25549}
           name={currentProfile.name}
           status={currentProfile.status} />
         <UserOutput 
+          staticUserID={25549}
           name={currentProfile.name}
           status={currentProfile.status} />
         <UserInput 

@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import UserOutput from './components/UserOutput/UserOutput';
-import UserInput from './components/UserInput/UserInput';
 import ValidationComponent from './components/ValidationComponent/ValidationComponent';
+
+// import UserOutput from './components/UserOutput/UserOutput';
+// import UserInput from './components/UserInput/UserInput';
+// import ValidationComponent from './components/ValidationComponent/ValidationComponent';
+// import CharComponent from './components/CharComponent/CharComponent'
 /*
 1. create an input field (in App component) wih a change listener which outputs the length of the entered text below(e.g in a paragraph)
 2. create a new component (=> validationComponent) which receives th text length as a prop
@@ -12,96 +15,34 @@ import ValidationComponent from './components/ValidationComponent/ValidationComp
 6. when you click a CharComponent. It should be removed from the entered text.
 */
 
-
-
 class App extends Component {
   state = {
-    profile: [
-      { name: 'Davis', age: 26, status: ''}
-    ],
-
-    inputLength: 0
+    text: 'ss',
+    lengthOfText: null
   }
 
-  // Helper Function
-  randomNameGenerator = () => {
-    let randomNum = Math.floor(Math.random() * 6)
-
-    let randomNames = ['Joe', 'Nick', 'James', 'Rambo', 'Jenny', 'Kate']
-
-    return randomNames[randomNum]
-  }
- 
-  buttonNameGenerator = (event) => {
-    let currentProfile = this.state.profile[0];
-
-    this.setState({
-      profile: [
-        { name: event, age: currentProfile.age, status: currentProfile.status }
-      ]
-    })
+  getText = (event) => {
+    let copyText = this.state.text.slice()
+    copyText = event.target.value
+    this.setState({text: copyText})
   }
 
-  nameChangeHandler = (event) => {
-    let currentProfile = this.state.profile[0];
-    this.setState({
-      profile: [
-        { name: event.target.value, age: currentProfile.age, status: currentProfile.status }
-      ]
-    })
+  checkLength = () => {
+    let textLength = this.state.text.length
+    return (textLength > 5) ? "Text long enough!" : "Text too short!"
   }
-
-  statusChangeHandler = (event) => {
-    let currentProfile = this.state.profile[0];
-    this.setState({
-      profile: [
-        { name: currentProfile.name, age: currentProfile.age, status: event.target.value }
-      ]
-    })
-  }
-
-  inputChangeHandler = (event) => {
-    this.setState({
-      inputLength: event.target.value
-    })
-  }
-
-
 
   render() {
-    let currentProfile = this.state.profile[0];
-    return (
-      <div className="App">
-        <h1>1st Assignment</h1>
-        <button onClick={this.buttonNameGenerator.bind(this, this.randomNameGenerator())}>
-          Random Name Generator
-        </button>
-
-        <UserOutput 
-          staticUserID={25549}
-          name={currentProfile.name}
-          status={currentProfile.status} />
-        <UserOutput 
-          staticUserID={25549}
-          name={currentProfile.name}
-          status={currentProfile.status} />
-        <UserInput 
-          changedName={this.nameChangeHandler}
-          changedStatus= {this.statusChangeHandler}
-          name={currentProfile.name} />
-
-          <input 
-          type='text' 
-          value={this.state.inputLength}
-          onChange={this.inputChangeHandler}>
-          </input>
-
-          <ValidationComponent
-          input={this.state.inputLength}
-          inputLength={this.state.inputLength.length}
-          />
+    return(
+      <div className='App'>
+        <h1>Type something and get the length</h1>
+        <input type="text" onChange={this.getText} value={this.state.text}>
+        </input>
+        <p>{this.state.text}</p>
+        <p>Length of Text: {this.state.text.length}</p>
+        <ValidationComponent length={this.state.text.length} validator={this.checkLength()}/>
       </div>
-    );
+    )
   }
 }
 

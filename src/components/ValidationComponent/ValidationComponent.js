@@ -1,13 +1,12 @@
-import React from 'react';
+import React from 'react'
 
 const validationComponent = (props) => {
-
-    return (
-        <div>
-            <p>{props.input}</p>
-            <p>Length: {props.inputLength}</p>
-        </div>
-    )
+  return (
+    <div>
+      <p>From validationComponent-length: {props.length}</p>
+      <p>{props.validator}</p>
+    </div>
+  )
 }
 
-export default validationComponent;
+export default validationComponent

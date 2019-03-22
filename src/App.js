@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import ValidationComponent from './components/ValidationComponent/ValidationComponent';
+import Validation from './components/ValidationComponent/ValidationComponent';
+import Char from './components/CharComponent/CharComponent'
 
 // import UserOutput from './components/UserOutput/UserOutput';
 // import UserInput from './components/UserInput/UserInput';
@@ -17,30 +18,68 @@ import ValidationComponent from './components/ValidationComponent/ValidationComp
 
 class App extends Component {
   state = {
-    text: 'ss',
-    lengthOfText: null
+    userInput: '',
+    showElements: true,
+    lettersArray: []
   }
 
-  getText = (event) => {
-    let copyText = this.state.text.slice()
+  inputChangedHandler = (event) => {
+    let copyText = this.state.userInput.slice()
     copyText = event.target.value
-    this.setState({text: copyText})
+    this.setState({userInput: copyText})
   }
 
-  checkLength = () => {
-    let textLength = this.state.text.length
-    return (textLength > 5) ? "Text long enough!" : "Text too short!"
+  hideElements = () => {
+    let doesShow = this.state.showElements;
+    this.setState({showElements: !doesShow})
+  }
+
+  deleteCharHandler = ( index ) => {
+    console.log(index)
+    const text = this.state.userInput.split('');
+    text.splice(index, 1);
+    const updatedText = text.join('');
+    this.setState({userInput: updatedText});
   }
 
   render() {
+
+    const charList = this.state.userInput.split('').map((ch, index) => {
+      return <Char 
+        character={ch} 
+        key={index}
+        clicked={() => this.deleteCharHandler(index)}/>;
+    })
+
+    let showElements = null;
+    let showButton = null;
+    if (this.state.userInput) {
+      showButton = (        
+      <button 
+        onClick={this.hideElements}>{this.state.showElements ? 'Hide' : 'Show'} Elements
+      </button>)
+    }
+
+    //hides or shows the elements
+    if (this.state.showElements) {
+      showElements = 
+    <div>
+      {charList}
+    </div>
+    }
+
     return(
       <div className='App'>
         <h1>Type something and get the length</h1>
-        <input type="text" onChange={this.getText} value={this.state.text}>
-        </input>
-        <p>{this.state.text}</p>
-        <p>Length of Text: {this.state.text.length}</p>
-        <ValidationComponent length={this.state.text.length} validator={this.checkLength()}/>
+
+        {showButton}
+        <input 
+          type="text" 
+          onChange={this.inputChangedHandler} 
+          value={this.state.userInput}/>
+          <p>{this.state.userInput}</p>
+          <Validation inputLength={this.state.userInput.length}/>
+        {showElements}
       </div>
     )
   }

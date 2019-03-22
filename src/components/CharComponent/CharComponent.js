@@ -1,22 +1,19 @@
-// import React from 'react'
+import React from 'react';
 
-// const validationComponent = (props) => {
-//   return (
-//     <div>
-//       <p>From validationComponent-length: {props.length}</p>
-//       <p>{props.validator}</p>
-//     </div>
-//   )
-// }
+const char = (props) => {
+  const style = {
+    display: 'inline-block', 
+    padding: '16px', 
+    textAlign: 'center', 
+    margin: '16px', 
+    border: '1px solid black'
+  };
 
-// export default validationComponent
+  return (
+    <div style={style} onClick={props.clicked}>
+      {props.character}
+    </div>
+  );
+};
 
-// import React from 'react';
-
-// const charComponent = (props) => {
-//   return (
-//     <div></div>
-//   )
-
-// }
-
+export default char
